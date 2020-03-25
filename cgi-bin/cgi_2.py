@@ -3,7 +3,7 @@ import cgi
 import cgitb
 cgitb.enable()
 import os
-import datetime
+from datetime import datetime
 
 
 default = "No Value Present"
@@ -23,10 +23,10 @@ body = """<html>
 </body>
 </html>""".format(
     software=os.environ.get('SERVER_SOFTWARE', default),
-    script='aaaa',
-    month='bbbb',
-    date='cccc',
-    year='dddd',
-    client_ip='eeee'
+    script=os.environ.get("SCRIPT_NAME", default),
+    month=datetime.now().strftime("%B"),
+    date=datetime.now().day,
+    year=datetime.now().year,
+    client_ip=os.environ.get("REMOTE_ADDR", default)
 )
 print(body)
